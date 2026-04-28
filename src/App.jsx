@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { getAllData, saveProducts, saveTransactions, saveFinance } from "./api.js";
+import { Html5QrcodeScanner } from "html5-qrcode";
 
 const USERS = [
-  { username: "admin", password: "admin123", role: "admin", name: "Admin" },
-  { username: "kassir", password: "kassir123", role: "kassir", name: "Kassir" },
+  { username: "admin", password: "admin", role: "admin", name: "Admin" },
+  { username: "kassir", password: "kassir", role: "kassir", name: "Kassir" },
 ];
 
 const NAV_ITEMS = {
@@ -27,6 +28,21 @@ export default function App() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
+   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [showScanner, setShowScanner] = useState(false);
+  const [onScanResult, setOnScanResult] = useState(null);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const openScanner = (callback) => {
+    setOnScanResult(() => callback);
+    setShowScanner(true);
+  };
+
   const [products, setProducts] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [finance, setFinance] = useState([]);
@@ -622,4 +638,25 @@ const styles = {
   cartSummary: { background: "#13151f", border: "1px solid #1e2030", borderRadius: 12, padding: "24px", position: "sticky", top: 0 },
   cartTitle: { fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 16 },
   cartTotal: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, padding: "12px 0", borderTop: "1px solid #1e2030", borderBottom: "1px solid #1e2030" },
+  function ScannerModal({ onClose, onScan }) {
+  useEffect(() => {
+    const scanner = new Html5QrcodeScanner("reader", { 
+      fps: 10, 
+      qrbox: { width: 250, height: 150 }, // Shtrix kod uchun kengroq
+      aspectRatio: 1.0 
+    });
+    scanner.render(onScan, (err) => {});
+    return () => scanner.clear();
+  }, []);
+
+  return (
+    <div style={styles.modalOverlay}>
+      <div style={styles.modalContent}>
+        <div id="reader" style={{ width: "100%" }}></div>
+        <button style={styles.btnDanger} onClick={onClose}>Yopish</button>
+      </div>
+    </div>
+  );
+}
+
 };
