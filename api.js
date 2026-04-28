@@ -1,6 +1,6 @@
 // src/api.js
 // Google Apps Script URL'ni shu yerga yozing
-const API_URL = import.meta.env.VITE_API_URL || 'YOUR_APPS_SCRIPT_URL';
+const API_URL = 'https://script.google.com/macros/s/AKfycbz7ZXULccWG8TitD2nLS3brb4LqxLIxUdImoJklFQPwG6haZ1XKVcnFB72lwDElffHQ/exec';
 
 async function call(params) {
   const url = new URL(API_URL);
