@@ -577,6 +577,46 @@ function Reports({ products, transactions, finance }) {
 const fmt = (n) => Number(n || 0).toLocaleString("uz-UZ");
 
 const styles = {
+    appWrap: { 
+    display: "flex", 
+    height: "100vh", 
+    background: "#0f1117", 
+    color: "#e2e8f0",
+    flexDirection: window.innerWidth < 768 ? "column" : "row" // Mobil uchun
+  },
+  bottomNav: {
+    display: "flex",
+    justifyContent: "space-around",
+    background: "#13151f",
+    borderTop: "1px solid #1e2030",
+    padding: "10px 0",
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+    zIndex: 100
+  },
+  modalOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: "rgba(0,0,0,0.9)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1000,
+    padding: 20
+  },
+  modalContent: {
+    background: "#13151f",
+    padding: 20,
+    borderRadius: 16,
+    width: "100%",
+    maxWidth: 400,
+    textAlign: "center"
+  },
+
   loadingWrap: { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh", background: "#0f1117", gap: 16 },
   spinner: { width: 40, height: 40, borderRadius: "50%", border: "3px solid #6366f1", borderTopColor: "transparent", animation: "spin 1s linear infinite" },
   loadingText: { color: "#94a3b8", fontFamily: "monospace" },
