@@ -413,6 +413,21 @@ function Sales({ products, saveProducts, transactions, saveTransactions }) {
           <div style={styles.formTitle}>Tovar qo'shish</div>
           <div style={{ display: "flex", gap: 8 }}>
             <input style={{ ...styles.input, flex: 1 }} value={barcode} onChange={e => setBarcode(e.target.value)} placeholder="Barkod skanerlang yoki nom kiriting" onKeyDown={e => e.key === "Enter" && addToCart()} autoFocus />
+            <div style={{ display: "flex", gap: 8 }}>
+  <input 
+    placeholder="Shtrix kod" 
+    value={barcode} 
+    onChange={(e) => setBarcode(e.target.value)} 
+    style={styles.input} 
+  />
+  <button 
+    onClick={() => openScanner((code) => setBarcode(code))} 
+    style={styles.btnPrimary}
+  >
+    📷
+  </button>
+</div>
+
             <button style={styles.primaryBtn} onClick={addToCart}>Qo'shish</button>
           </div>
           {msg && <div style={{ marginTop: 8, color: msg.startsWith("✓") ? "#22c55e" : "#ef4444", fontSize: 13 }}>{msg}</div>}
