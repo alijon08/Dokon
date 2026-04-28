@@ -2,7 +2,7 @@
   "name": "Do'kon Pro",
   "short_name": "Do'kon Pro",
   "description": "Do'kon boshqaruv tizimi",
-  "start_url": "/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f1117",
   "theme_color": "#6366f1",
